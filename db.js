@@ -1,22 +1,23 @@
 const mysql = require('mysql');
-require('dotenv').config();
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+const db = mysql.createConnection({
+  host: 'mysql-192916fa-muci.e.aivencloud.com',
+  user: 'avnadmin',
+  password: 'AVNS_4x5z6uhmNpHi05jOY0W',
+  database: 'defaultdb',
+  port: 26980,
   ssl: {
-    rejectUnauthorized: true
+    // Fix for self-signed certs used by Aiven
+    rejectUnauthorized: false
   }
 });
 
-connection.connect((err) => {
+db.connect((err) => {
   if (err) {
-    console.error('Database connection failed:', err);
-    return;
+    console.error('❌ Database connection failed:', err);
+  } else {
+    console.log('✅ Connected to Aiven MySQL');
   }
-  console.log('Connected to MySQL database!');
 });
 
-module.exports = connection;
+module.exports = db;
