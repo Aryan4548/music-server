@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const getDb = require('../db');
+const db = require('../db'); // ✅ Import the connection directly
 
 // Get all playlists
 router.get('/', (req, res) => {
-  const db = getDb();
   db.query('SELECT * FROM playlists', (err, results) => {
     if (err) {
       console.error('❌ Playlists query error:', err);
