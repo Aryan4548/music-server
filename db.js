@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const db = mysql.createConnection({
   host: 'mysql-192916fa-muci.e.aivencloud.com',
@@ -7,7 +7,6 @@ const db = mysql.createConnection({
   database: 'defaultdb',
   port: 26980,
   ssl: {
-    // Fix for self-signed certs used by Aiven
     rejectUnauthorized: false
   }
 });
