@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const db = require('../db'); // ✅ Directly import the DB connection
 
-// Get all songs
+// ✅ Get all songs
 router.get('/', (req, res) => {
-  const db = getDb();
   db.query('SELECT * FROM songs', (err, results) => {
     if (err) {
       console.error('❌ Songs query error:', err);
@@ -14,9 +13,8 @@ router.get('/', (req, res) => {
   });
 });
 
-// Get songs by playlist ID
+// ✅ Get songs by playlist ID
 router.get('/playlist/:id', (req, res) => {
-  const db = getDb();
   db.query('SELECT * FROM songs WHERE playlist_id = ?', [req.params.id], (err, results) => {
     if (err) {
       console.error('❌ Songs by playlist query error:', err);
@@ -28,7 +26,6 @@ router.get('/playlist/:id', (req, res) => {
 
 // ✅ POST: Add a new song
 router.post('/', (req, res) => {
-  const db = getDb();
   const { title, artist, url, thumbnail, playlist_id } = req.body;
 
   if (!title || !artist || !url) {
