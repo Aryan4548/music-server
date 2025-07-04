@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const getDb = require('../db');
+const db = require('../db');
 
 // Get all songs
 router.get('/', (req, res) => {
